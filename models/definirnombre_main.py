@@ -10,12 +10,6 @@ class Definirnombre_main(models.Model):
 
 	ap_paterno = fields.Char(string="Apellido paterno", required=True)
 	ap_materno = fields.Char(string="Apellido materno", required=True)
-	
-	nombres_mx = fields.Char(
-		 string="Nombre(s)",
-		 required=True,
-		 placeholder="Nombre(s)"
-	)
 
 	@api.multi
 	@api.depends('name','ap_paterno','ap_materno')
@@ -23,3 +17,5 @@ class Definirnombre_main(models.Model):
 		for record in self:
 			if record.ap_paterno and record.ap_materno:
 				record.display_name = record.name + " " + record.ap_paterno + " " + record.ap_materno
+			else:
+				record.display_name = record.name
